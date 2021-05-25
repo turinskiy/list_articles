@@ -1,69 +1,39 @@
-import React from "react";
 
-const getAllArticles = async () => {
-    let json = '';
-    let url = 'https://storage.googleapis.com/aller-structure-task/test_data.json';
-    // let response = await fetch(url);
+export const Article = (props) => {
+  const { content } = props;
+  let width = Math.floor(content.width * 100 / 12);
 
-    // if (response.ok) { // если HTTP-статус в диапазоне 200-299
-    //     // получаем тело ответа (см. про этот метод ниже)
-    //     json = await response.json();
-    // } else {
-    //     alert("Ошибка HTTP: " + response.status);
-    // }
+  // imageUrl: "https://dbstatic.no/?imageId=72003501&panow=0&panoh=0&panoy=0&panox=0&heighty=0&heightx=0&heightw=0&heighth=0"
+  // title: "Stakkars mann!"
+  // type: "Article"
+  // url: "https://www.dagbladet.no/sport/det-han-ser-er-det-han-har/72005062"
+  // width: 4
 
-    fetch(url)
-        .then(response => response.json())
-        .then(result => json = result);
+  // console.log('width', width)
+  return (
+    <div className="article-block" style={{ width: `${width}vw` }}>
+      <div className="row article">
+        {/* Image */}
+        <div className="cell-image">
+          <img src={content.imageUrl} alt={content.title} />
+        </div>
 
-    return json;
+        <div className="row grow1">
+          <div className="column grow1">
+            {/* Title */}
+            <div className="article-title grow1">
+              <div>
+                <a target="_blank" href={content.url}>{content.title}</a>
+              </div>
+            </div>
+            {/* Buttons */}
+            <div className="grow0">
+              <button>{'Edit'}</button>
+              <button>{'Del'}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
-
-class Article extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            error: null,
-            isLoaded: false,
-            articles: []
-        };
-    }
-
-    componentDidMount() {
-        fetch('https://storage.googleapis.com/aller-structure-task/test_data.json')
-            .then(res => res.json())
-            .then(
-                result => {
-                    this.setState({
-                        isLoaded: true,
-                        articles: result
-                    })
-                },
-                error => {
-                    console.log('get into error block')
-                    this.setState({
-                        isLoaded: false,
-                        error
-                    })
-                }
-                );
-    }
-
-    render() {
-        const { error, isLoaded, articles} = this.state;
-        console.log('articles', articles[0])
-        
-        if(error) {
-            return <div>{error}</div>
-        } else if(!isLoaded) {
-            return <div>Loading...</div>
-        } else {
-            return (<ul>
-                {articles[0].map((article, id) => (<li key={id}>{`${id}) ${article.columns[0].title}`}</li>))}
-            </ul>);
-        }
-    }
-}
-
-export default Article;

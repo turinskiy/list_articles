@@ -1,5 +1,5 @@
-import Article from './components/article';
-import {Articles} from './components/articles';
+import {ArticleList} from './components/ArticleList';
+
 import './App.css';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       <div>
-        <Articles />
+        <ArticleList />
       </div>
       </header>
     </div>
