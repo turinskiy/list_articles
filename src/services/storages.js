@@ -1,3 +1,5 @@
+const STORAGE_TYPE = 'localStorage'; // 'sessionStorage'
+
 function storageAvailable(type) {
 	try {
 		var storage = window[type],
@@ -12,14 +14,18 @@ function storageAvailable(type) {
 }
 
 export function saveAllArticles(data) {
-	if (storageAvailable('localStorage')) {
-		// Save all the data
+	if (storageAvailable(STORAGE_TYPE)) {
+		saveDataToStorage(data);
 	}
 	else {
-		alert('Be aware: The Localstorage is unable and you CAN NOT edit or delete anything!')
+		alert(`Be aware: The ${STORAGE_TYPE} is unavailable! Your changes won't be saved.`)
 	}
 }
 
-export function saveToSessionStorage(item) {
-	sessionStoragesetItem(item.key, item.value);
+function saveDataToStorage(data) {
+	window[STORAGE_TYPE].setItem('articles', data);	
+}
+
+function getDataFromStorage(key) {
+	window[STORAGE_TYPE].getItem(key);
 }
