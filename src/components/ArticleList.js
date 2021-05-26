@@ -8,7 +8,7 @@ export function ArticleList(props) {
 	return !articles || articles.length === 0 ? null : (
 		<div className="column grow1 container">
 			{articles.map((item, index) => (
-				<ArticleRow data={item} key={index} />
+				<ArticleRow data={item} key={index} row={index} />
 			))}
 		</div>
 	)

@@ -1,14 +1,13 @@
 import { Title } from './Title';
 
-export function Article(props) {
-	const { content } = props;
+export function ArticleCell(props) {
+	const { content, row, cell } = props;
 	let width = Math.floor(content.width * 100 / 12);
-
-	// function onEditClick()
 
 	return (
 		<div className="article-block" style={{ width: `${width}vw` }}>
 			<div className="column article">
+			<span>{`[${row}][${cell}]`}</span>
 				{/* Image */}
 				<div className="column grow1">
 					<div className="cell-image">
@@ -16,17 +15,15 @@ export function Article(props) {
 					</div>
 				</div>
 
-				{/* <div className="row grow1"> */}
 				<div className="column grow0">
 					{/* Title */}
 					<Title url={content.url} title={content.title} />
 
-					{/* Buttons */}
+					{/* Delete Button */}
 					<div className="button-block grow0">
 						<button className="button">{'Del'}</button>
 					</div>
 				</div>
-				{/* </div> */}
 			</div>
 		</div>
 	);

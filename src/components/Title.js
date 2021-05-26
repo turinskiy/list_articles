@@ -15,7 +15,7 @@ export function Title(props) {
 	const [isEdit, setIsEdit] = useState(false);
 	const [isEmpty, setIsEmpty] = useState(false);
 	const [isErrorMessage, setIsErrorMessage] = useState(false);
-	const [errorMessageKey, setErrorMessageKey] = useState('');
+	const [errorMessageKey, setErrorMessageKey] = useState('none');
 	const [oldTitle, setOldTitle] = useState('');
 
 	function handleTextInput(value) {
@@ -78,7 +78,7 @@ export function Title(props) {
 						<button disabled={isEmpty} onClick={() => onEdit(!isEdit)}>{isEdit ? 'Save' : 'Edit'}</button>
 					</div>
 					<div className="cell padding-horisontal-small">
-						<button disabled={!isEdit} onClick={onCancel}>{'X'}</button>
+						<button disabled={!isEdit} data-is-visible={isEdit} onClick={onCancel}>{'X'}</button>
 					</div>
 				</div>
 			</div>

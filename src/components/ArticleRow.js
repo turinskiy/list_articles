@@ -1,12 +1,11 @@
-import { Article } from './Article'
+import { ArticleCell } from './ArticleCell'
 
 export function ArticleRow(props) {
-	const { data } = props;
+	const { data, row } = props;
 
-	// console.log('data', data)
 	return <div className="row min-height">
 		{data.columns.map((item, index) => {
-			return <Article content={item} key={index} />
+			return <ArticleCell content={item} key={index} row={row} cell={index} />
 		})}
 	</div>;
 }
