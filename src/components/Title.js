@@ -69,7 +69,7 @@ export function Title(props) {
 					</div>
 				</div>
 				// title as a link
-				: <div className="cell padding-horisontal-small"><a target="_blank" href={url}>{titleText}</a></div>
+				: <div className="cell padding-horisontal-small"><a href={url} target="_blank" rel="noreferrer">{titleText}</a></div>
 			}
 			{/* Buttons */}
 			<div className="cell">
