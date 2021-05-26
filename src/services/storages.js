@@ -15,17 +15,26 @@ function storageAvailable(type) {
 
 export function saveAllArticles(data) {
 	if (storageAvailable(STORAGE_TYPE)) {
-		saveDataToStorage(data);
+		let promise = new Promise((resolve, reject) => {
+			saveDataToStorage(data);
+			resolve(true);
+		});
+		
+		return promise;
 	}
 	else {
 		alert(`Be aware: The ${STORAGE_TYPE} is unavailable! Your changes won't be saved.`)
 	}
 }
 
-function saveDataToStorage(data) {
-	window[STORAGE_TYPE].setItem('articles', data);	
+export function loadAllArticles() {
+	return getDataFromStorage();
 }
 
-function getDataFromStorage(key) {
-	window[STORAGE_TYPE].getItem(key);
+function saveDataToStorage(data) {
+	window[STORAGE_TYPE].setItem('articles', JSON.stringify(data));	
+}
+
+function getDataFromStorage() {
+	return JSON.parse(window[STORAGE_TYPE].getItem('articles'));
 }
