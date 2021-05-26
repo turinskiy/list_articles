@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {ArticleRow} from './ArticleRow'
-import './articles.css';
+import './styles/common_styles.css';
+import './styles/articles.css';
 
 export const ArticleList = (props) => {
     const [error, setError] = useState(null);
@@ -33,7 +34,7 @@ export const ArticleList = (props) => {
     }
   
     return !articles || articles.length === 0 ? null : (
-      <div className="container">
+      <div className="column grow1 container">
         {articles.map((item, index) => (
           <ArticleRow data={item} key={index} />
         ))}
