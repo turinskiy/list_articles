@@ -53,20 +53,18 @@ export const Title = (props) => {
 
     return (
         <div className="row article-title grow01 align-baselign">
-            {/* <div className="row title-text align-baselign"> */}
-                {isEdit 
-                    ? <div className="row align-baselign">
-                        <div className="column" data-is-visible={isEmpty}>
-                            <span className="required-field">*</span>
-                        </div>
-                        <div className="column">
-                            <div className="cell"><input type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} /></div>
-                            <div className="cell" data-is-visible={isErrorMessage}><span>{errorMessages[errorMessageKey]}</span></div>
-                        </div>
+            {isEdit 
+                ? <div className="row align-baselign">
+                    <div className="column" data-is-visible={isEmpty}>
+                        <span className="required-field">*</span>
                     </div>
-                    : <div className="cell padding-horisontal-small"><a target="_blank" href={url}>{titleText}</a></div>
-                }
-            {/* </div> */}
+                    <div className="column">
+                        <div className="cell"><input type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} /></div>
+                        <div className="cell" data-is-visible={isErrorMessage}><span>{errorMessages[errorMessageKey]}</span></div>
+                    </div>
+                </div>
+                : <div className="cell padding-horisontal-small"><a target="_blank" href={url}>{titleText}</a></div>
+            }
             <div className="cell">
                 <div className="row align-baselign">
                     <div className="cell padding-horisontal-small"><button disabled={isEmpty} onClick={() => onEdit(!isEdit)}>{isEdit ? 'Save' : 'Edit'}</button></div>

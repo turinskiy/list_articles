@@ -18,17 +18,13 @@
 }
 
 .article-title {
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    border-top: 1px solid #b8bec7;
     display: flex;
     flex-grow: 1;
     justify-content: center;
     align-items: baseline;
     padding: 0.5rem;
-}
-
-.title-text {
-    border: 1px solid blue;
-    padding: 0 0.5rem;
 }
 
 .required-field {
