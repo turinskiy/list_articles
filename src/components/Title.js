@@ -54,17 +54,24 @@ export function Title(props) {
 	return (
 		<div className="row article-title grow01 align-baselign">
 			{isEdit
+				// title as an input
 				? <div className="row align-baselign">
 					<div className="column" data-is-visible={isEmpty}>
 						<span className="required-field">*</span>
 					</div>
 					<div className="column">
-						<div className="cell"><input type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} /></div>
-						<div className="cell" data-is-visible={isErrorMessage}><span>{errorMessages[errorMessageKey]}</span></div>
+						<div className="cell">
+							<input type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} />
+						</div>
+						<div className="cell" data-is-visible={isErrorMessage}>
+							<span>{errorMessages[errorMessageKey]}</span>
+						</div>
 					</div>
 				</div>
+				// title as a link
 				: <div className="cell padding-horisontal-small"><a target="_blank" href={url}>{titleText}</a></div>
 			}
+			{/* Buttons */}
 			<div className="cell">
 				<div className="row align-baselign">
 					<div className="cell padding-horisontal-small">
