@@ -1,4 +1,23 @@
 const STORAGE_TYPE = 'localStorage'; // 'sessionStorage'
+const DATA_KEY = 'articles';
+
+export function checkStorageAvailability() {
+	let isStorageAvailable = storageAvailable(STORAGE_TYPE);
+	!isStorageAvailable && alert(`Be aware: The ${STORAGE_TYPE} is unavailable! Your changes won't be saved.`);
+
+	return isStorageAvailable;
+}
+
+export function saveAllArticles(data) {
+	return new Promise((resolve, reject) => {
+		saveDataToStorage(data);
+		resolve(true);
+	});
+}
+
+export function loadAllArticles() {
+	return getDataFromStorage();
+}
 
 function storageAvailable(type) {
 	try {
@@ -13,28 +32,10 @@ function storageAvailable(type) {
 	}
 }
 
-export function saveAllArticles(data) {
-	if (storageAvailable(STORAGE_TYPE)) {
-		let promise = new Promise((resolve, reject) => {
-			saveDataToStorage(data);
-			resolve(true);
-		});
-		
-		return promise;
-	}
-	else {
-		alert(`Be aware: The ${STORAGE_TYPE} is unavailable! Your changes won't be saved.`)
-	}
-}
-
-export function loadAllArticles() {
-	return getDataFromStorage();
-}
-
 function saveDataToStorage(data) {
-	window[STORAGE_TYPE].setItem('articles', JSON.stringify(data));	
+	window[STORAGE_TYPE].setItem(DATA_KEY, JSON.stringify(data));	
 }
 
 function getDataFromStorage() {
-	return JSON.parse(window[STORAGE_TYPE].getItem('articles'));
+	return JSON.parse(window[STORAGE_TYPE].getItem(DATA_KEY));
 }
