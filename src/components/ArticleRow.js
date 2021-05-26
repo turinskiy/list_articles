@@ -6,7 +6,7 @@ export const ArticleRow = (props) => {
     // console.log('data', data)
     return <div className="row min-height">
       {data.columns.map((item, index) => {
-        return <Article content={item} />
+        return <Article content={item} key={index} />
       })}
     </div>;
   }  
