@@ -1,13 +1,17 @@
 import { Title } from './Title';
 
 export function ArticleCell(props) {
-	const { content, row, cell } = props;
+	const { content, row, col } = props;
 	let width = Math.floor(content.width * 100 / 12);
+
+	function onTitleUpdate(event, title) {
+		props.handleUpdateTitle(event, row, col, title)
+	}
 
 	return (
 		<div className="article-block" style={{ width: `${width}vw` }}>
 			<div className="column article">
-			<span>{`[${row}][${cell}]`}</span>
+			<span>{`[${row}][${col}]`}</span>
 				{/* Image */}
 				<div className="column grow1">
 					<div className="cell-image">
@@ -17,7 +21,7 @@ export function ArticleCell(props) {
 
 				<div className="column grow0">
 					{/* Title */}
-					<Title url={content.url} title={content.title} />
+					<Title url={content.url} title={content.title} onTitleUpdate={onTitleUpdate} />
 
 					{/* Delete Button */}
 					<div className="button-block grow0">

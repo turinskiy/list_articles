@@ -12,7 +12,7 @@ const MIN_VALUE = 2;
 export function Title(props) {
 	const { url, title } = props;
 	const [titleText, setTitleText] = useState(title);
-	const [isEdit, setIsEdit] = useState(false);
+	const [isEdittable, setIsEdit] = useState(false);
 	const [isEmpty, setIsEmpty] = useState(false);
 	const [isErrorMessage, setIsErrorMessage] = useState(false);
 	const [errorMessageKey, setErrorMessageKey] = useState('none');
@@ -30,11 +30,14 @@ export function Title(props) {
 		setIsErrorMessage(isMinLen || isMaxLen);
 	}
 
-	function onEdit(flag) {
-		// debugger
-		setOldTitle(titleText);
-		console.log('flag', flag);
-		setIsEdit(flag);
+	function onEdit(event, isFirstClick, isSaveClicked) {
+		isFirstClick && setOldTitle(titleText);
+		setIsEdit(isFirstClick);
+
+		// Save an updated value into the Storage
+		if(isSaveClicked && titleText !== oldTitle) {
+			props.onTitleUpdate(event, titleText);
+		}
 	}
 
 	function onCancel() {
@@ -53,7 +56,7 @@ export function Title(props) {
 
 	return (
 		<div className="row article-title grow01 align-baselign">
-			{isEdit
+			{isEdittable
 				// title as an input
 				? <div className="row align-baselign">
 					<div className="column" data-is-visible={isEmpty}>
@@ -75,10 +78,10 @@ export function Title(props) {
 			<div className="cell">
 				<div className="row align-baselign">
 					<div className="cell padding-horisontal-small">
-						<button disabled={isEmpty} onClick={() => onEdit(!isEdit)}>{isEdit ? 'Save' : 'Edit'}</button>
+						<button disabled={isEmpty} onClick={(e) => onEdit(e, !isEdittable, isEdittable)}>{isEdittable ? 'Save' : 'Edit'}</button>
 					</div>
 					<div className="cell padding-horisontal-small">
-						<button disabled={!isEdit} data-is-visible={isEdit} onClick={onCancel}>{'X'}</button>
+						<button data-is-visible={isEdittable} onClick={onCancel}>{'X'}</button>
 					</div>
 				</div>
 			</div>

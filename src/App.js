@@ -10,6 +10,20 @@ function App() {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [articles, setArticles] = useState([]);
 
+	function handleUpdateTitle(e, row, col, title) {
+		// let article = {...articles[row].columns[col]};
+		// article.title = title;
+		// articles[row].columns[col] = article;
+
+		// TODO: think of immutability
+		articles[row].columns[col].title = title;
+		// Save updated data into the Storage
+		saveAllArticles(articles)
+			.then(() => {
+				console.info('All articles were saved into the localStorage')
+			});
+	}
+
 	useEffect(() => {
 		checkStorageAvailability();
 		// Check if data exists in the storage
@@ -46,7 +60,7 @@ function App() {
 						? <div>{`Error: ${error.message}`}</div>
 						: !isLoaded 
 							? <div>{'Loading...'}</div>
-							: <ArticleList articles={articles}/>
+							: <ArticleList articles={articles} handleUpdateTitle={handleUpdateTitle} />
 					}
 				</div>
 			</header>
