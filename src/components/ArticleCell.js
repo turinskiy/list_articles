@@ -8,10 +8,14 @@ export function ArticleCell(props) {
 		props.handleUpdateTitle(event, row, col, title)
 	}
 
+	function onArticleDelete() {
+		props.handleDeleteArticle(row, col);
+	}
+
 	return (
-		<div className="article-block" style={{ width: `${width}vw` }}>
+		<div className="article-block" style={{ width: `${width}%`, maxWidth: `${width}%` }}>
 			<div className="column article">
-			<span>{`[${row}][${col}]`}</span>
+			<span>{`width: ${width} [${row}][${col}]`}</span>
 				{/* Image */}
 				<div className="column grow1">
 					<div className="cell-image">
@@ -25,7 +29,7 @@ export function ArticleCell(props) {
 
 					{/* Delete Button */}
 					<div className="button-block grow0">
-						<button className="button">{'Del'}</button>
+						<button className="button" onClick={onArticleDelete}>{'Del'}</button>
 					</div>
 				</div>
 			</div>
