@@ -1,13 +1,7 @@
 import { useState } from 'react';
+import { errorMessages } from '../constants/articles';
+import { Button } from './buttons/Button';
 
-const errorMessages = {
-	minLength: 'The title is to short',
-	maxLength: 'The title is to long',
-	none: 'none'
-};
-
-const MAX_VALUE = 200;
-const MIN_VALUE = 2;
 
 export function Title(props) {
 	const { url, title } = props;
@@ -23,8 +17,8 @@ export function Title(props) {
 		setTitleText(value);
 
 		let isEmpty = value.length === 0;
-		let isMinLen = value.length > 0 && value.length <= MIN_VALUE;
-		let isMaxLen = value.length >= MAX_VALUE;
+		let isMinLen = value.length > 0 && value.length <= errorMessages.MIN_VALUE;
+		let isMaxLen = value.length >= errorMessages.MAX_VALUE;
 		setIsEmpty(isEmpty);
 		setErrorMessageKey(isMinLen ? 'minLength' : isMaxLen ? 'maxLength' : 'none');
 		setIsErrorMessage(isMinLen || isMaxLen);
@@ -35,7 +29,7 @@ export function Title(props) {
 		setIsEdit(isFirstClick);
 
 		// Save an updated value into the Storage
-		if(isSaveClicked && titleText !== oldTitle) {
+		if (isSaveClicked && titleText !== oldTitle) {
 			props.onTitleUpdate(event, titleText);
 		}
 	}
@@ -56,7 +50,7 @@ export function Title(props) {
 						<span className="required-field">*</span>
 					</div>
 					<div className="column">
-						<div className="cell">
+						<div className="cell padding-horisontal-small">
 							<input className="input" type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} />
 						</div>
 						<div className="cell error-message" data-is-visible={isErrorMessage}>
@@ -70,11 +64,11 @@ export function Title(props) {
 			{/* Buttons */}
 			<div className="cell">
 				<div className="row align-baselign">
-					<div className="cell padding-horisontal-small">
-						<button className="button" disabled={isEmpty} onClick={(e) => onEdit(e, !isEdittable, isEdittable)}>{isEdittable ? 'Save' : 'Edit'}</button>
+					<div className="cell"/* padding-horisontal-small"*/>
+						<Button titleText={isEdittable ? 'Save' : 'Edit'} onClickHandler={(e) => onEdit(e, !isEdittable, isEdittable)} isDisabled={isEmpty || isErrorMessage} />
 					</div>
-					<div className="cell padding-horisontal-small">
-						<button className="button" data-is-visible={isEdittable} onClick={onCancel}>{'Cancel'}</button>
+					<div className="cell"/* padding-horisontal-small"*/ data-is-visible={isEdittable}>
+						<Button titleText="Cancel" onClickHandler={onCancel} className="button-cancel" />
 					</div>
 				</div>
 			</div>

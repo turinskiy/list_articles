@@ -29,6 +29,15 @@
     background-color: rgba(0,107,180,0.9);
 }
 
+.button[data-is-disabled="true"] {
+	background-color: #56809c;
+	color: rgb(185, 185, 185);
+}
+
+.button[data-is-disabled="true"]:hover {
+	cursor: not-allowed;
+}
+
 .button-cancel {
 	background-color: #b40000;
     border-color: #b40000;

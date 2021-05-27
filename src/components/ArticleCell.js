@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Title } from './Title';
 import { Button } from './buttons/Button';
 
@@ -31,9 +31,6 @@ export function ArticleCell(props) {
 		setIsDelClicked(false);
 	}
 
-	// useEffect(() => {});
-
-	console.log('render ArticleCell')
 	return (
 		<div className="article-block" style={{ width: `${width}%`, maxWidth: `${width}%` }}>
 			<div className="column article">

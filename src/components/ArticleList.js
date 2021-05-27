@@ -9,7 +9,9 @@ export function ArticleList(props) {
 	return !articles || articles.length === 0 ? null : (
 		<div className="column grow1 container">
 			{articles.map((item, index) => (
-				<ArticleRow data={item} key={index} row={index} handleUpdateTitle={handleUpdateTitle} handleDeleteArticle={handleDeleteArticle} />
+				item.columns.length === 0 
+					? null 
+					: <ArticleRow data={item} key={index} row={index} handleUpdateTitle={handleUpdateTitle} handleDeleteArticle={handleDeleteArticle} />
 			))}
 		</div>
 	)
