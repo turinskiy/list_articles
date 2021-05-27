@@ -1,11 +1,11 @@
 import './Button.css';
 
 export function Button(props) {
-	const { onArticleDelete } = props;
+	const { titleText, onClickHandler, className } = props;
 
 	return (
 		<div className="button-container">
-			<button className="button" onClick={onArticleDelete}>{'Delete Article'}</button>
+			<button className={["button", className].join(' ')} onClick={onClickHandler}>{titleText}</button>
 		</div>
 	);
 }

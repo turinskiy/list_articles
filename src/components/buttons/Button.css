@@ -26,5 +26,14 @@
 	text-decoration: underline;
 	transform: translateY(-1px);
 	box-shadow: 0 4px 8px 0 rgb(54 97 126 / 15%), 0 2px 2px -1px rgb(54 97 126 / 30%);
-    background-color: rgba(0,107,180,0.5);
+    background-color: rgba(0,107,180,0.9);
+}
+
+.button-cancel {
+	background-color: #b40000;
+    border-color: #b40000;
+}
+
+.button-cancel:hover {
+	background-color: rgba(180, 0, 0, 0.9);
 }

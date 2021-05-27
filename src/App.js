@@ -9,7 +9,7 @@ function App() {
 	const [error, setError] = useState(null);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [articles, setArticles] = useState([]);
-	const [isDataUpdated, setIsDataUpdated] = useState(false);
+	const [isDataUpdated, setIsDataUpdated] = useState();
 
 	function handleUpdateTitle(e, row, col, title) {
 		// TODO: think of immutability
@@ -24,9 +24,8 @@ function App() {
 
 	function handleDeleteArticle(row, col) {
 		articles[row].columns.splice(col, 1);
+		// Update UI
 		setArticles(articles);
-
-		// Save updated data into the Storage
 		saveAllArticles(articles)
 			.then(() => {
 				console.info('All articles were saved into the localStorage')
@@ -35,14 +34,15 @@ function App() {
 	}
 
 	useEffect(() => {
-		console.log('useEffect onLoad')
+		// console.log('useEffect onLoad')
+
 		checkStorageAvailability();
-		// Check if data exists in the storage
 		let data = loadAllArticles();
 
 		if (data) {
 			setArticles(data);
 			setIsLoaded(true);
+			// console.log('Load data from the Store', data.length)
 		} else {
 			loadArticlesByUrl()
 				.then(res => res.json())
@@ -63,15 +63,17 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		setIsLoaded(false);
+		// console.log('useEffect next', articles)
+
 		let data = loadAllArticles();
 		if (data) {
 			setArticles(data);
-			setIsLoaded(true);
+		} else {
+			setArticles(articles);
 		}
-	}, [isDataUpdated])
+	}, [isDataUpdated]);
 
-	console.log('render App', articles, isLoaded)
+	// console.log('render App', articles.length, isLoaded)
 	return (
 		<div className="App">
 			<header className="App-header">
