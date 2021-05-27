@@ -1,0 +1,30 @@
+.button-container {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 0;
+	flex-basis: auto;
+	justify-content: center;
+	padding: 0.25rem;
+}
+
+.button {
+    cursor: pointer;
+    width: 10rem;
+    height: 2.5rem;
+	background: none;
+    border: solid 1px transparent;
+    border-radius: 0.3rem;
+    box-shadow: 0 2px 2px -1px rgb(152 162 179 / 30%);
+	background-color: #006BB4;
+    border-color: #006BB4;
+    color: #fff;
+	/* box-shadow: 0 2px 2px -1px rgb(54 97 126 / 30%); */
+	font-weight: 400;
+}
+
+.button:hover {
+	text-decoration: underline;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px 0 rgb(54 97 126 / 15%), 0 2px 2px -1px rgb(54 97 126 / 30%);
+    background-color: rgba(0,107,180,0.5);
+}

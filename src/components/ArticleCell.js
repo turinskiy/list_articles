@@ -1,4 +1,5 @@
 import { Title } from './Title';
+import { Button } from './buttons/Button';
 
 export function ArticleCell(props) {
 	const { content, row, col } = props;
@@ -29,7 +30,7 @@ export function ArticleCell(props) {
 
 					{/* Delete Button */}
 					<div className="button-block grow0">
-						<button className="button" onClick={onArticleDelete}>{'Del'}</button>
+						<Button onArticleDelete={onArticleDelete} />
 					</div>
 				</div>
 			</div>
