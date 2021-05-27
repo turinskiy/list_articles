@@ -5,7 +5,7 @@ export function Button(props) {
 
 	return (
 		<div className="button-container">
-			<button className="button button-primary" onClick={onArticleDelete}>{'Delete Article'}</button>
+			<button className="button" onClick={onArticleDelete}>{'Delete Article'}</button>
 		</div>
 	);
 }

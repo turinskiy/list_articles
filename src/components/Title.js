@@ -44,15 +44,8 @@ export function Title(props) {
 		// debugger
 		setTitleText(oldTitle);
 		setIsEdit(false);
+		setIsErrorMessage(false)
 	}
-
-	// useEffect(() => {
-	//     function handleTextInput(value) {
-	//         console.log(value)
-	//         setTitleText(value);//(prev => `${prev}`)
-	//     }
-	// }, [titleText]);
-
 
 	return (
 		<div className="row article-title grow01 align-baselign">
@@ -64,9 +57,9 @@ export function Title(props) {
 					</div>
 					<div className="column">
 						<div className="cell">
-							<input type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} />
+							<input className="input" type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} />
 						</div>
-						<div className="cell" data-is-visible={isErrorMessage}>
+						<div className="cell error-message" data-is-visible={isErrorMessage}>
 							<span>{errorMessages[errorMessageKey]}</span>
 						</div>
 					</div>
@@ -78,10 +71,10 @@ export function Title(props) {
 			<div className="cell">
 				<div className="row align-baselign">
 					<div className="cell padding-horisontal-small">
-						<button disabled={isEmpty} onClick={(e) => onEdit(e, !isEdittable, isEdittable)}>{isEdittable ? 'Save' : 'Edit'}</button>
+						<button className="button" disabled={isEmpty} onClick={(e) => onEdit(e, !isEdittable, isEdittable)}>{isEdittable ? 'Save' : 'Edit'}</button>
 					</div>
 					<div className="cell padding-horisontal-small">
-						<button data-is-visible={isEdittable} onClick={onCancel}>{'X'}</button>
+						<button className="button" data-is-visible={isEdittable} onClick={onCancel}>{'Cancel'}</button>
 					</div>
 				</div>
 			</div>
