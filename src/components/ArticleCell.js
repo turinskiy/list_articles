@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { Title } from './Title';
 import { Button } from './buttons/Button';
+import { getValueFromUrl } from '../services/articles';
 
 export function ArticleCell(props) {
 	const { content, row, col } = props;
 	const [isDelClicked, setIsDelClicked] = useState(false);
 	const [timeoutId, setTimeoutId] = useState(null);
 
-	let width = Math.floor(content.width * 100 / 12);
-
+	let articleWidth = Math.floor(content.width * 100 / 12);
+	let imageHeight = getValueFromUrl(content.imageUrl, '&height=');
+	let imageWidth = getValueFromUrl(content.imageUrl, '&width=');
+	
 	function onTitleUpdate(event, title) {
 		props.handleUpdateTitle(event, row, col, title)
 	}
@@ -32,7 +35,7 @@ export function ArticleCell(props) {
 	}
 
 	return (
-		<div className="article-block" style={{ width: `${width}%`, maxWidth: `${width}%` }}>
+		<div className="article-block" style={{ width: `${articleWidth}%`, maxWidth: `${articleWidth}%` }}>
 			<div className="column article">
 			<div className="column article-overlay" data-is-displayed={isDelClicked}>
 				<div className="column grow1">
@@ -42,7 +45,7 @@ export function ArticleCell(props) {
 				{/* Image */}
 				<div className="column grow1">
 					<div className="cell-image">
-						<img src={content.imageUrl} alt={content.title} />
+						<img src={content.imageUrl} alt={content.title} width={imageWidth} height={imageHeight} />
 					</div>
 				</div>
 
