@@ -1,38 +1,27 @@
 .icon-btn svg {
 	cursor: pointer;
-    /* width: 10rem; */
-    /* height: 2rem; */
-	background: none;
-    /* border: solid 1px transparent; */
+	background: white;
     border-radius: 0.3rem;
-    box-shadow: 0 2px 2px -1px rgb(152 162 179 / 30%);
-	/* background-color: #006BB4; */
-    /* border-color: #006BB4; */
-    /* color: #fff; */
-	/* box-shadow: 0 2px 2px -1px rgb(54 97 126 / 30%); */
 	font-weight: 500;
-	background-color: white;
 }
 
 .icon-btn svg {
 	fill: #006BB4;
 }
 
-.icon-btn:hover svg {
-	transform: translateY(-1px);
-	box-shadow: 0 4px 8px 0 rgb(54 97 126 / 15%), 0 2px 2px -1px rgb(54 97 126 / 30%);
-    fill: rgba(0,107,180,0.9);
+.icon-btn[data-is-disabled="true"]:hover svg {
+	cursor: not-allowed;
+	transform: translateY(0);
+	box-shadow: none;
 }
 
 .icon-btn[data-is-disabled="true"] svg {
 	fill: #56809c;
-	transform: translateY(-1px);
-
-	background-color: rgb(185, 185, 185);
+	transform: translateY(0);
 }
 
-.icon-btn[data-is-disabled="true"]:hover svg {
-	cursor: not-allowed;
-	/* transform: translateY(0); */
-	box-shadow: none;
+.icon-btn:hover svg {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px 0 rgb(54 97 126 / 15%), 0 2px 2px -1px rgb(54 97 126 / 30%);
+    fill: rgba(0,107,180,0.9);
 }

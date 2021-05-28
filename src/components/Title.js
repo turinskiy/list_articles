@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { errorMessages } from '../constants/articles';
-import { Button } from './buttons/Button';
 import { IconButton } from './icons/IconButton';
 
 
@@ -25,14 +24,9 @@ export function Title(props) {
 		setIsErrorMessage(isMinLen || isMaxLen);
 	}
 
-	function onEditClcik(event, isFirstClick, isSaveClicked) {
-		isFirstClick && setOldTitle(titleText);
-		setIsEdit(isFirstClick);
-
-		// // Save an updated value into the Storage
-		// if (isSaveClicked && titleText !== oldTitle) {
-		// 	props.onTitleUpdate(event, titleText);
-		// }
+	function onEditClcik() {
+		setOldTitle(titleText);
+		setIsEdit(true);
 	}
 
 	function onSave(event) {
@@ -42,27 +36,21 @@ export function Title(props) {
 	}
 
 	function onCancel() {
-		// debugger
 		setTitleText(oldTitle);
 		setIsEdit(false);
+		setIsEmpty(false);
 		setIsErrorMessage(false)
 	}
 
 	return (
 		<div className="row article-title grow01 align-baselign" style={{padding: '1rem 0.25rem 0'}}>
 			<div className="row">
-				{/* Inline Edit field */}
-				{/* <div className="cell grow1 justify-center" style={{border: '1px solid lime', position: 'relative'}}>
-					<input className="input" type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} data-is-empty={isEmpty} />
-					{/* <a className="inpu" href={url} target="_blank" rel="noreferrer">{titleText}</a> /}
-					<span className="error-message">{errorMessages[errorMessageKey]}</span>
-				</div> */}
 
-				<div className="column grow1" style={{border: '0px solid lime', position: 'relative'}}>
+				<div className="column grow1">
 					<div className="cell" style={{padding: isEdittable ? '0 .25rem' : '0.25rem 0'}}>
 						{isEdittable 
 							? <input className="input" type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} data-is-empty={isEmpty} />
-							: <a className="inpu" href={url} target="_blank" rel="noreferrer">{titleText}</a>
+							: <a href={url} target="_blank" rel="noreferrer">{titleText}</a>
 						}
 					</div>
 				
@@ -72,31 +60,20 @@ export function Title(props) {
 							<span className="error-message">{errorMessages[errorMessageKey]}</span>
 						</div>
 						<div className="row" style={{justifyContent: 'flex-end'}}>
-							<div style={{border: '0px solid black', padding: '.25rem .25rem 0'}} className="cell">
-								<IconButton type="check"  onClickHandler={(e) => onSave(e)} />
+							<div style={{padding: '.25rem'}} className="cell">
+								<IconButton type="check"  onClickHandler={(e) => onSave(e)} isDisabled={isEmpty || isErrorMessage} height="1.5rem" />
 							</div>
-							<div style={{border: '0px solid black', padding: '.25rem .25rem 0'}} className="cell">
-								<IconButton type="esc" onClickHandler={onCancel} />
+							<div style={{padding: '.25rem'}} className="cell">
+								<IconButton type="esc" onClickHandler={onCancel}  height="1.5rem" />
 							</div>
 						</div>
 					</div>
 				
 				</div>
 
-
-
-
-				{/* Buttons */}
-				<div className="cell" style={{flexGrow: '0', border: '0px solid red'}}>
-					<div className="row align-baselign">
-						<div className="cell" style={{border: '0px solid black', padding: '0 0.25rem'}}>
-							{/* <Button titleText={isEdittable ? 'Save' : 'Edit'} onClickHandler={(e) => onEditClcik(e, !isEdittable, isEdittable)} isDisabled={isEmpty || isErrorMessage} /> */}
-							<IconButton type="edit" onClickHandler={(e) => onEditClcik(e, !isEdittable, isEdittable)} isDisabled={isEdittable} />
-						</div>
-						{/* <div className="cell" data-is-visible={isEdittable}>
-							<Button titleText="Cancel" onClickHandler={onCancel} className="button-cancel" />
-						</div> */}
-					</div>
+				{/* Edit Button */}
+				<div className="cell" style={{flexGrow: '0', padding: '0 0.25rem'}}>
+					<IconButton type="edit" onClickHandler={onEditClcik} isDisabled={isEdittable} height="2rem" />
 				</div>
 			</div>
 		</div>
