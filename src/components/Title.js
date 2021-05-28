@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { errorMessages } from '../constants/articles';
 import { Button } from './buttons/Button';
+import { IconButton } from './icons/IconButton';
 
 
 export function Title(props) {
@@ -24,14 +25,20 @@ export function Title(props) {
 		setIsErrorMessage(isMinLen || isMaxLen);
 	}
 
-	function onEdit(event, isFirstClick, isSaveClicked) {
+	function onEditClcik(event, isFirstClick, isSaveClicked) {
 		isFirstClick && setOldTitle(titleText);
 		setIsEdit(isFirstClick);
 
+		// // Save an updated value into the Storage
+		// if (isSaveClicked && titleText !== oldTitle) {
+		// 	props.onTitleUpdate(event, titleText);
+		// }
+	}
+
+	function onSave(event) {
 		// Save an updated value into the Storage
-		if (isSaveClicked && titleText !== oldTitle) {
-			props.onTitleUpdate(event, titleText);
-		}
+		setIsEdit(false);
+		props.onTitleUpdate(event, titleText);
 	}
 
 	function onCancel() {
@@ -42,33 +49,53 @@ export function Title(props) {
 	}
 
 	return (
-		<div className="row article-title grow01 align-baselign">
-			{isEdittable
-				// title as an input
-				? <div className="row align-baselign">
-					<div className="column" data-is-visible={isEmpty}>
-						<span className="required-field">*</span>
+		<div className="row article-title grow01 align-baselign" style={{padding: '1rem 0.25rem 0'}}>
+			<div className="row">
+				{/* Inline Edit field */}
+				{/* <div className="cell grow1 justify-center" style={{border: '1px solid lime', position: 'relative'}}>
+					<input className="input" type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} data-is-empty={isEmpty} />
+					{/* <a className="inpu" href={url} target="_blank" rel="noreferrer">{titleText}</a> /}
+					<span className="error-message">{errorMessages[errorMessageKey]}</span>
+				</div> */}
+
+				<div className="column grow1" style={{border: '0px solid lime', position: 'relative'}}>
+					<div className="cell" style={{padding: isEdittable ? '0 .25rem' : '0.25rem 0'}}>
+						{isEdittable 
+							? <input className="input" type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} data-is-empty={isEmpty} />
+							: <a className="inpu" href={url} target="_blank" rel="noreferrer">{titleText}</a>
+						}
 					</div>
-					<div className="column">
-						<div className="cell padding-horisontal-small">
-							<input className="input" type='text' value={titleText} onChange={e => handleTextInput(e.target.value)} />
+				
+					{/* Error message | Save | Cancel */}
+					<div className="row grow1" data-is-visible={isEdittable}>
+						<div className="cell grow1" style={{alignItems: 'flex-start', padding: '0 .25rem'}} data-is-visible={isErrorMessage}>
+							<span className="error-message">{errorMessages[errorMessageKey]}</span>
 						</div>
-						<div className="cell error-message" data-is-visible={isErrorMessage}>
-							<span>{errorMessages[errorMessageKey]}</span>
+						<div className="row" style={{justifyContent: 'flex-end'}}>
+							<div style={{border: '0px solid black', padding: '.25rem .25rem 0'}} className="cell">
+								<IconButton type="check"  onClickHandler={(e) => onSave(e)} />
+							</div>
+							<div style={{border: '0px solid black', padding: '.25rem .25rem 0'}} className="cell">
+								<IconButton type="esc" onClickHandler={onCancel} />
+							</div>
 						</div>
 					</div>
+				
 				</div>
-				// title as a link
-				: <div className="cell padding-horisontal-small"><a href={url} target="_blank" rel="noreferrer">{titleText}</a></div>
-			}
-			{/* Buttons */}
-			<div className="cell">
-				<div className="row align-baselign">
-					<div className="cell"/* padding-horisontal-small"*/>
-						<Button titleText={isEdittable ? 'Save' : 'Edit'} onClickHandler={(e) => onEdit(e, !isEdittable, isEdittable)} isDisabled={isEmpty || isErrorMessage} />
-					</div>
-					<div className="cell"/* padding-horisontal-small"*/ data-is-visible={isEdittable}>
-						<Button titleText="Cancel" onClickHandler={onCancel} className="button-cancel" />
+
+
+
+
+				{/* Buttons */}
+				<div className="cell" style={{flexGrow: '0', border: '0px solid red'}}>
+					<div className="row align-baselign">
+						<div className="cell" style={{border: '0px solid black', padding: '0 0.25rem'}}>
+							{/* <Button titleText={isEdittable ? 'Save' : 'Edit'} onClickHandler={(e) => onEditClcik(e, !isEdittable, isEdittable)} isDisabled={isEmpty || isErrorMessage} /> */}
+							<IconButton type="edit" onClickHandler={(e) => onEditClcik(e, !isEdittable, isEdittable)} isDisabled={isEdittable} />
+						</div>
+						{/* <div className="cell" data-is-visible={isEdittable}>
+							<Button titleText="Cancel" onClickHandler={onCancel} className="button-cancel" />
+						</div> */}
 					</div>
 				</div>
 			</div>

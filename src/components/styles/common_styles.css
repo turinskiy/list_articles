@@ -16,6 +16,7 @@
 .row {
     display: flex;
     flex-direction: row;
+	flex-grow: 1;
 }
 
 .cell {
@@ -43,6 +44,10 @@
 
 .align-baselign {
     align-items: baseline;
+}
+
+.justify-center {
+	justify-content: center;
 }
 
 img {

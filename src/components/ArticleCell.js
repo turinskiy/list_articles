@@ -37,12 +37,15 @@ export function ArticleCell(props) {
 	return (
 		<div className="article-block" style={{ width: `${articleWidth}%`, maxWidth: `${articleWidth}%` }}>
 			<div className="column article">
-			<div className="column article-overlay" data-is-displayed={isDelClicked}>
-				<div className="column grow1">
-					<Button titleText="Cancel" onClickHandler={cancelDelete} className="button-cancel" />
+
+				{/* Overlay */}
+				<div className="column article-overlay" data-is-displayed={isDelClicked}>
+					<div className="column grow1">
+						<Button titleText="Cancel" onClickHandler={cancelDelete} className="button-cancel" />
+					</div>
 				</div>
-			</div>
-				{/* Image */}
+
+				{/* Picture */}
 				<div className="column grow1">
 					<div className="cell-image">
 						<img src={content.imageUrl} alt={content.title} width={imageWidth} height={imageHeight} />
