@@ -82,10 +82,3 @@
 .input[data-is-empty="false"] {
 	border-color: unset;
 }
-
-.button-block {
-    padding: .25rem;
-    background-color: #fafbfd;
-    border-bottom-left-radius: .3rem;
-    border-bottom-right-radius: .3rem;
-}

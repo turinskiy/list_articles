@@ -40,10 +40,11 @@ export function ArticleCell(props) {
 
 				{/* Overlay */}
 				<div className="column article-overlay" data-is-displayed={isDelClicked}>
-					<div className="column grow1">
-						<Button titleText="Cancel" onClickHandler={cancelDelete} className="button-cancel" />
-					</div>
+					<Button titleText="Cancels the deletion" onClickHandler={cancelDelete} />
 				</div>
+
+				{/* Delete Button */}
+				<Button titleText="Delete Article" onClickHandler={onArticleDelete} alignment="flex-end" className="danger-button" />
 
 				{/* Picture */}
 				<div className="column grow1">
@@ -55,11 +56,6 @@ export function ArticleCell(props) {
 				<div className="column grow0">
 					{/* Title */}
 					<Title url={content.url} title={content.title} onTitleUpdate={onTitleUpdate} />
-
-					{/* Delete Button */}
-					<div className="button-block grow0">
-						<Button titleText="Delete Article" onClickHandler={onArticleDelete} />
-					</div>
 				</div>
 			</div>
 		</div>
