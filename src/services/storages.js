@@ -38,6 +38,5 @@ function saveDataToStorage(data) {
 
 function getDataFromStorage() {
 	let data = JSON.parse(window[STORAGE_TYPE].getItem(DATA_KEY));
-	// data && console.log('get all data from the Store', data.length);
 	return data;
 }

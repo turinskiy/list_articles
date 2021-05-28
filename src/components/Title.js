@@ -13,7 +13,6 @@ export function Title(props) {
 	const [oldTitle, setOldTitle] = useState('');
 
 	function handleTextInput(value) {
-		console.log(value);
 		setTitleText(value);
 
 		let isEmpty = value.length === 0;

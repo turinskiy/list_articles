@@ -34,7 +34,6 @@ function App() {
 	}
 
 	useEffect(() => {
-		// console.log('useEffect onLoad')
 
 		checkStorageAvailability();
 		let data = loadAllArticles();
@@ -42,7 +41,6 @@ function App() {
 		if (data) {
 			setArticles(data);
 			setIsLoaded(true);
-			// console.log('Load data from the Store', data.length)
 		} else {
 			loadArticlesByUrl()
 				.then(res => res.json())
@@ -63,7 +61,6 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		// console.log('useEffect next', articles)
 
 		let data = loadAllArticles();
 		if (data) {
@@ -73,7 +70,6 @@ function App() {
 		}
 	}, [isDataUpdated]);
 
-	// console.log('render App', articles.length, isLoaded)
 	return (
 		<div className="App">
 			<header className="App-header">
