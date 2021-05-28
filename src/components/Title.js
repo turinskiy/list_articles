@@ -43,7 +43,7 @@ export function Title(props) {
 	}
 
 	return (
-		<div className="row article-title grow01 align-baselign" style={{padding: '1rem 0.25rem 0'}}>
+		<div className="row article-title grow01 align-baselign" style={{padding: '1rem 0.25rem 0.25rem'}}>
 			<div className="row">
 
 				<div className="column grow1">
